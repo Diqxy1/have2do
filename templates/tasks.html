@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Tasks</title>
+  </head>
+  <body>
+    <h1>Tasks</h1>
+
+    <ol>
+      <!-- titulo -->
+      {% for task in tasks %}
+          <li>{{ task }}</li>
+          <ul>
+            <!-- descrição -->
+            {% for description in descriptions %}
+              <li>{{ description }}</li>
+            {% endfor %}
+            {% for image in images %}
+              <img src="{{ image }}" alt="">
+            {% endfor %}
+          </ul>
+          {% empty %}
+          <span>Você não tem nenhuma task disponivel</span>
+      {% endfor %}
+    </ol>
+
+      <a href="/add/tasks/">Adicinar Task</a>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Tasks</title>
+  </head>
+  <body>
+    <h1>Adicionar Task</h1>
+      <form method="post">
+        {% csrf_token %}
+
+        <input type="text" name="task">
+
+        <textarea name="description" rows="1"></textarea>
+
+        <input type="text" name="image">
+
+        <button type="submit">Adicionar</button>
+      </form>
+
+      <br/>
+
+      <a href="/tasks">Minhas Tasks</a>
+  </body>
+</html>
