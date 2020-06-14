@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="pt-br" dir="ltr">
+<html lang="pt-br">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -8,10 +8,10 @@
     <title>Tasks</title>
   </head>
   <body>
-    <h1>Tasks</h1>
+    <h1 class="my-2 mx-2">Tasks</h1>
 
     {% for task in tasks %}
-    <div class="card" style="width: 18rem;">
+    <div class="card my-2 mx-2" style="width: 18rem;">
       <img class="card-img-top" src="{{ task.image }}" alt="Imagem de capa do card">
       <div class="card-body">
         <h5 class="card-title">{{ task.title.upper }}</h5>
@@ -20,6 +20,6 @@
     </div>
     {% endfor %}
 
-      <a href="/add/tasks/">Adicinar Task</a>
+      <a class="mx-2 btn btn-link" href="/add/tasks/">Adicinar Task</a>
   </body>
 </html>

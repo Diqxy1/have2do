@@ -1,25 +1,36 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-bt">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
     <title>Tasks</title>
   </head>
   <body>
-    <h1>Adicionar Task</h1>
+    <h1 class="mx-2">Adicionar Task</h1>
+
+    <div class="d-flex mx-2">
       <form method="post">
         {% csrf_token %}
-
-        <input type="text" name="task">
-
-        <textarea name="description" rows="1"></textarea>
-
-        <input type="text" name="image">
-
-        <button type="submit">Adicionar</button>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Tarefá</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1"  name="task">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Descrição</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" name="description" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">URL da sua imagem</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" name="image">
+        </div>
+        <button type="submit" class="btn btn-primary">Adicionar</button>
       </form>
+    </div>
 
       <br/>
 
-      <a href="/tasks">Minhas Tasks</a>
+      <a class="mx-2 btn btn-link" href="/tasks">Minhas Tasks</a>
   </body>
 </html>
