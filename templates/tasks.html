@@ -1,29 +1,24 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="pt-br" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
     <title>Tasks</title>
   </head>
   <body>
     <h1>Tasks</h1>
 
-    <ol>
-      <!-- titulo -->
-      {% for task in tasks %}
-          <li>{{ task }}</li>
-          <ul>
-            <!-- descrição -->
-            {% for description in descriptions %}
-              <li>{{ description }}</li>
-            {% endfor %}
-            {% for image in images %}
-              <img src="{{ image }}" alt="">
-            {% endfor %}
-          </ul>
-          {% empty %}
-          <span>Você não tem nenhuma task disponivel</span>
-      {% endfor %}
-    </ol>
+    {% for task in tasks %}
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{{ task.image }}" alt="Imagem de capa do card">
+      <div class="card-body">
+        <h5 class="card-title">{{ task.title.upper }}</h5>
+        <p class="card-text">{{ task.description }}</p>
+      </div>
+    </div>
+    {% endfor %}
 
       <a href="/add/tasks/">Adicinar Task</a>
   </body>

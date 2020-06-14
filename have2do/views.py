@@ -1,18 +1,20 @@
 from django.shortcuts import render, redirect
 
 task_list = []
-description_list = []
-image_list = []
 
 
 def tasks(request):
-    return render(request, 'tasks.html', {'tasks': task_list, 'descriptions': description_list, 'images': image_list})
+    return render(request, 'tasks.html', {'tasks': task_list})
 
 def add_task(request):
     if request.method == 'POST':
-        task_list.append(request.POST['task'])
-        description_list.append(request.POST['description'])
-        image_list.append(request.POST['image'])
+        data = {
+            'title': request.POST['task'],
+            'description': request.POST['description'],
+            'image': request.POST['image'],
+        }
+        task_list.append(data)
+
         return redirect('/tasks/')
 
     return render(request, 'add_task.html')
