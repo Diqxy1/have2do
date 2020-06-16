@@ -15,11 +15,11 @@
       <img class="card-img-top" src="{{ task.image }}" alt="Imagem de capa do card">
       <div class="card-body">
         <h5 class="card-title">{{ task.title.upper }}</h5>
-        <p class="card-text">{{ task.description }}</p>
+        <p class="card-text">{{ task.abstract }}</p>
       </div>
     </div>
     {% endfor %}
 
-      <a class="mx-2 btn btn-link" href="/add/tasks/">Adicinar Task</a>
+      <a class="mx-2 btn btn-link" href="/tasks/add/tasks/">Adicinar Task</a>
   </body>
 </html>
