@@ -14,23 +14,16 @@
       <form method="post">
         {% csrf_token %}
         <div class="form-group">
-          <label for="exampleFormControlInput1">Tarefá</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1"  name="task">
+          <label for="exampleFormControlInput1">Título</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1"  name="title" value="{{ task.title }}">
         </div>
         <div class="form-group">
           <label for="exampleFormControlTextarea1">Descrição</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" name="description" rows="3"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="exampleFormControlInput1">URL da sua imagem</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" name="image">
+          <textarea class="form-control" id="exampleFormControlTextarea1" name="description" rows="3">{{ task.description }}</textarea>
         </div>
         <button type="submit" class="btn btn-primary">Adicionar</button>
       </form>
     </div>
 
-      <br/>
-
-      <a class="mx-2 btn btn-link" href="/tasks/tasks/">Minhas Tasks</a>
   </body>
 </html>

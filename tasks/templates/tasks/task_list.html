@@ -12,14 +12,17 @@
 
     {% for task in tasks %}
     <div class="card my-2 mx-2" style="width: 18rem;">
-      <img class="card-img-top" src="{{ task.image }}" alt="Imagem de capa do card">
+      <!-- <img class="card-img-top" src="{{ task.image }}" alt="Imagem de capa do card"> -->
       <div class="card-body">
         <h5 class="card-title">{{ task.title.upper }}</h5>
         <p class="card-text">{{ task.abstract }}</p>
+        <a class="mx-2 btn btn-link" href="/tasks/detail/{{ task.id }}">ver mais</a>
+        <a class="mx-2 btn btn-link" href="/tasks/update/{{ task.id }}">Editar</a>
+        <a class="mx-2 btn btn-link" href="/tasks/delete/{{ task.id }}">Excluir</a>
       </div>
     </div>
     {% endfor %}
 
-      <a class="mx-2 btn btn-link" href="/tasks/add/tasks/">Adicinar Task</a>
+    <a class="mx-2 btn btn-link" href="/tasks/create/">Adicinar Task</a>
   </body>
 </html>

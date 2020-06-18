@@ -2,20 +2,45 @@ from django.shortcuts import render, redirect
 from .models import Task
 
 # Create your views here.
-task_list = []
+
+def task_list(request):
+    tasks = Task.objects.all()
+    context = {'tasks':tasks}
+    return render(request, 'tasks/task_list.html', context)
 
 
-def tasks(request):
-    context = {'tasks': task_list}
-    return render(request, 'tasks.html', context)
-
-def add_task(request):
+def task_create(request):
     if request.method == 'POST':
-        task = Task(request.POST['task'],
-                    request.POST['description'],
-                    request.POST['image'])
-        task_list.append(task)
+        title_data = request.POST['title']
+        description_data = request.POST['description']
+        Task.objects.create(
+            title=title_data,
+            description=description_data,
+        )
+        return redirect('/tasks/list')
+    return render(request, 'tasks/task_create.html')
 
-        return redirect('/tasks/tasks')
 
-    return render(request, 'add_task.html')
+def task_detail(request, id):
+    task = Task.objects.get(id=id)
+    context = {'task':task}
+    return render(request, 'tasks/task_detail.html', context)
+
+
+def task_update(request, id):
+    task = Task.objects.get(id=id)
+    context = {'task': task}
+    if request.method == 'POST':
+        new_title = request.POST['title']
+        new_description = request.POST['description']
+        task.title = new_title
+        task.description = new_description
+        task.save()
+        return redirect('/tasks/list')
+    return render(request, 'tasks/task_update.html', context)
+
+
+def task_delete(request, id):
+    task = Task.objects.get(id=id)
+    task.delete()
+    return redirect('/tasks/list')
