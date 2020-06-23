@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from .models import Task
+from projects.models import Project
+from .forms import TaskForm
 
 # Create your views here.
 
@@ -10,15 +13,22 @@ def task_list(request):
 
 
 def task_create(request):
+    # projects = Project.objects.all()
+    form = TaskForm(request.POST or None)
+    context = {'form':form}
     if request.method == 'POST':
-        title_data = request.POST['title']
-        description_data = request.POST['description']
-        Task.objects.create(
-            title=title_data,
-            description=description_data,
-        )
-        return redirect('/tasks/list')
-    return render(request, 'tasks/task_create.html')
+        if form.is_valid():
+            form.save()
+            return redirect(reverse_lazy('task_list'))
+        # project_id = request.POST['project']
+        # title_data = request.POST['title']
+        # description_data = request.POST['description']
+        # Task.objects.create(
+        #     title=title_data,
+        #     description=description_data,
+        #     project_id=project_id
+        # )
+    return render(request, 'tasks/task_create.html', context)
 
 
 def task_detail(request, id):
@@ -29,18 +39,21 @@ def task_detail(request, id):
 
 def task_update(request, id):
     task = Task.objects.get(id=id)
-    context = {'task': task}
+    form = TaskForm(request.POST or None, instance=task)
+    context = {'form':form}
     if request.method == 'POST':
-        new_title = request.POST['title']
-        new_description = request.POST['description']
-        task.title = new_title
-        task.description = new_description
-        task.save()
-        return redirect('/tasks/list')
+        if form.is_valid():
+            form.save()
+            return redirect(reverse_lazy('task_list'))
+        # new_title = request.POST['title']
+        # new_description = request.POST['description']
+        # task.title = new_title
+        # task.description = new_description
+        # task.save()
     return render(request, 'tasks/task_update.html', context)
 
 
 def task_delete(request, id):
     task = Task.objects.get(id=id)
     task.delete()
-    return redirect('/tasks/list')
+    return redirect(reverse_lazy('task_list'))
